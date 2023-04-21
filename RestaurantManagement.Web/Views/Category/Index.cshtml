@@ -1,0 +1,55 @@
+﻿@using RestaurantManagement.Domain.DTO.Response
+@model PagedResults<CategoryResponseModel>
+
+@{
+    ViewData["Title"] = "All Restaurants";
+}
+
+
+<div class="container shadow p-5">
+
+    <h1 class="text-center mb-3">Category </h1>
+    @if (@Context.Session.GetString("username") != null)
+    {
+        <div class="col mb-3">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-lg btn-primary"><i class="bi bi-file-plus-fill"></i>Add Category</a>
+        </div>
+    }
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">CreatedOn</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td width="20%">
+                        @item.Name
+                    </td>
+                    <td width="25%">
+                        @item.Description
+                    </td>
+                    <td width="20%">
+                        @item.CreatedOn
+                    </td>
+                    <td>
+                        @if (@Context.Session.GetString("username") != null)
+                        {
+                            <div role="group" class="w-60 btn-group">
+                                <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>&nbsp;
+                                <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i>Delete</a>
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

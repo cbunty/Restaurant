@@ -1,0 +1,96 @@
+﻿@using RestaurantManagement.Domain.DTO.Response
+@model PagedResults<RestaurantResponseModel>
+
+@{
+    ViewData["Title"] = "All Restaurants";
+}
+
+
+<div class="container shadow p-5">
+
+    <h1 class="text-center mb-3">Restaurants </h1>
+    @if (@Context.Session.GetString("username") != null)
+    {
+        <div class="col mb-3">
+            <a asp-controller="Restaurant" asp-action="Create" class="btn btn-lg btn-primary"><i class="bi bi-file-plus-fill"></i>Add Restaurant</a>
+        </div>
+    }
+    <hr />
+    <div class="row">
+
+        
+            @foreach (var item in Model.Results)
+            {
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb40">
+            <div class="menu-block">
+                <h3 class="menu-title">@item.Name</h3>
+                <div class="menu-content">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="dish-img"><a href="#"><img src="http://via.placeholder.com/70x70" alt="" class="img-circle"></a></div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <div class="dish-content">
+                                <h5 class="dish-title"><a href="#">@item.Description</a></h5>
+                                <span class="dish-meta">@item.PhoneNumber</span>
+                            </div>
+                        </div>
+                            <div role="group" class="w-60 btn-group">
+                                <a asp-controller="Menu" asp-action="index" asp-route-id="@item.Id" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>View Menu</a>&nbsp;
+                                @if (@Context.Session.GetString("username") != null)
+                                {
+                                    <a asp-controller="Restaurant" asp-action="Edit" asp-route-id="@item.Id" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>
+                                    <a asp-controller="Restaurant" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i>Delete</a>
+
+                                }
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+
+@*    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">CreatedOn</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td width="20%">
+                        @item.Name
+                    </td>
+                    <td width="25%">
+                        @item.Address
+                    </td>
+                    <td width="20%">
+                        @item.CreatedOn
+                    </td>
+                    <td>
+                       
+                        <div role="group" class="w-60 btn-group">
+                                <a asp-controller="Menu" asp-action="index" asp-route-id="@item.Id" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>View Menu</a>&nbsp;
+                            @if (@Context.Session.GetString("username") != null)
+                            {
+                                <a asp-controller="Restaurant" asp-action="Edit" asp-route-id="@item.Id" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>
+                                <a asp-controller="Restaurant" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i>Delete</a>
+
+                            }
+                        </div>
+                        
+                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+</div>

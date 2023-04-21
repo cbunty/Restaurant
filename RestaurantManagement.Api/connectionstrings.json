@@ -1,0 +1,8 @@
+{
+  "ConnectionStrings": {
+    "RestaurantSqlDb": {
+      "Name": "RestaurantDb",
+      "ConnectionString": "Data Source=PVB;Initial Catalog=RestaurantDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+    }
+  }
+}

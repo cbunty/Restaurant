@@ -1,0 +1,58 @@
+﻿@using RestaurantManagement.Domain.DTO.Response
+@model MenuResponseModel
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h2>Edit Menu</h2>
+    </div>
+
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="Name">Menu Name</label>
+                <input type="text" class="form-control mb-3" asp-for="Name" placeholder="Enter Name">
+                <span asp-validation-for="Name" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Description">Description</label>
+                <input type="text" class="form-control mb-3" asp-for="Description" placeholder="Enter Description">
+                <span asp-validation-for="Description" class=" alert-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="Price">Price</label>
+                <input type="text" class="form-control mb-3" asp-for="Price" placeholder="Enter Price">
+                <span asp-validation-for="Price" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label asp-for="Quantity">Quantity</label>
+                <input type="text" class="form-control" asp-for="Quantity">
+                <span asp-validation-for="Quantity" class=" alert-danger"></span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="CategoryId">Category</label>
+                <select class="form-control mb-3" asp-for="CategoryId" asp-items="@ViewBag.Categories"></select>
+                <span asp-validation-for="CategoryId" class=" alert-danger"></span>
+                <input type="hidden" asp-for="RestaurantId" value="@ViewBag.RestaurantId" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Save</button>
+        <a asp-controller="Restaurant" asp-action="Index" class="btn btn-lg btn-warning p-2">Back To List</a>
+    </form>
+
+</div>
+
+
+@*//for front end validations*@
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

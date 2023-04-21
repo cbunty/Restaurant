@@ -1,0 +1,62 @@
+﻿@using RestaurantManagement.Domain.DTO.Response
+@model List<MenuResponseModel>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+
+<div class="container shadow p-5">
+
+    <h1 class="text-center mb-3">Cart Items </h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">SubTotal</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in ViewBag.cart)
+            {
+                <tr>
+                    <td width="20%">
+                        @item.Name
+                    </td>
+                    <td width="25%">
+                        @item.Quantity
+                    </td>
+                    <td width="20%">
+                        @item.Price
+                    </td>
+                    <td width="20%">
+                        @(item.Price * item.Quantity)
+                    </td>
+                    <td>
+
+                        <div role="group" class="w-60 btn-group">
+                            <a asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Id" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Remove</a>
+                        </div>
+
+
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td align="right" colspan="6">Sum</td>
+                <td>
+                    @ViewBag.total
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <a asp-controller="Order" asp-action="PlaceOrder">Place Order</a>
+        </tfoot>
+    </table>
+    <br />
+    <a asp-controller="Menu" asp-action="index" asp-route-id="@ViewBag.RestaurantId">Continue Shopping</a>
+</div>
